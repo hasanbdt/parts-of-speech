@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Adverbs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fbff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .controls {
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: inline-block;
+    }
+    .card {
+      display: inline-block;
+      width: 250px;
+      background: #fff;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .emoji {
+      font-size: 2em;
+    }
+    .word {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    .phonics {
+      font-size: 0.9em;
+      color: #666;
+    }
+    .bangla {
+      margin: 5px 0;
+      font-size: 0.95em;
+      color: #333;
+    }
+    .example {
+      font-size: 0.9em;
+      margin: 8px 0;
+      color: #444;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= HEADER + NAVBAR START ================= -->
+<header style="background:#007bff; color:white; padding:15px 20px; display:flex; flex-direction:column; align-items:center; gap:10px;">
+  <div style="font-size:28px; font-weight:bold;">📚 Daily English Learning</div>
+  <nav style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px;">
+    <a href="index.html" class="nav-link">Home</a>
+	<a href="nouns.html" class="nav-link">Nouns</a>
+    <a href="pronouns.html" class="nav-link">Pronouns</a>
+    <a href="adjectives.html" class="nav-link">Adjectives</a>
+    <a href="verbs.html" class="nav-link">Verbs</a>
+    <a href="adverbs.html" class="nav-link">Adverbs</a>
+    <a href="prepositions.html" class="nav-link">Prepositions</a>
+    <a href="conjunctions.html" class="nav-link">Conjunctions</a>
+    <a href="interjections.html" class="nav-link">Interjections</a>
+  </nav>
+</header>
+
+<style>
+  .nav-link {
+    color:white; text-decoration:none; font-weight:bold; padding:6px 12px; border-radius:6px; transition:0.3s;
+  }
+  .nav-link:hover { background:white; color:#007bff; }
+  .nav-link.active { background:#0056b3; color:white; }
+</style>
+
+<script>
+  // Auto highlight active page
+  const currentPage = window.location.pathname.split("/").pop();
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach(link => {
+    if(link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+</script>
+<!-- ================= HEADER + NAVBAR END ================= -->
+
+
+<h1>📚 Daily Used  100 Adverbs</h1>
+
+<div class="controls">
+  <label for="voiceSelect">Voice: </label>
+  <select id="voiceSelect"></select>
+  <label for="rateRange"> Speed: </label>
+  <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1">
+</div>
+
+<div id="cards"></div>
+
+<script>
+const adverbs = [
+  {emoji:'⚡', word:'quickly', phonics:'/ˈkwɪkli/', banglaSpell:'কুইকলি', banglaMeaning:'দ্রুত', example:'He runs quickly.'},
+  {emoji:'🐢', word:'slowly', phonics:'/ˈsloʊli/', banglaSpell:'স্লোলি', banglaMeaning:'ধীরে', example:'She walks slowly.'},
+  {emoji:'📅', word:'daily', phonics:'/ˈdeɪli/', banglaSpell:'ডেইলি', banglaMeaning:'প্রতিদিন', example:'I read daily.'},
+  {emoji:'📆', word:'weekly', phonics:'/ˈwiːkli/', banglaSpell:'উইকলি', banglaMeaning:'সাপ্তাহিক', example:'We meet weekly.'},
+  {emoji:'📅', word:'monthly', phonics:'/ˈmʌnθli/', banglaSpell:'মান্থলি', banglaMeaning:'মাসিক', example:'She pays monthly.'},
+  {emoji:'🕛', word:'always', phonics:'/ˈɔːlweɪz/', banglaSpell:'অলওয়েজ', banglaMeaning:'সবসময়', example:'I always wake up early.'},
+  {emoji:'🌙', word:'sometimes', phonics:'/ˈsʌmtaɪmz/', banglaSpell:'সামটাইমস', banglaMeaning:'কখনও কখনও', example:'She sometimes cooks.'},
+  {emoji:'☀️', word:'often', phonics:'/ˈɔːfən/', banglaSpell:'অফেন', banglaMeaning:'ঘনঘন', example:'They often play football.'},
+  {emoji:'🌌', word:'never', phonics:'/ˈnevər/', banglaSpell:'নেভার', banglaMeaning:'কখনও না', example:'He never smokes.'},
+  {emoji:'⏰', word:'early', phonics:'/ˈɜːrli/', banglaSpell:'আর্লি', banglaMeaning:'শুরুতেই', example:'I wake up early.'},
+  {emoji:'🌃', word:'late', phonics:'/leɪt/', banglaSpell:'লেট', banglaMeaning:'দেরিতে', example:'She came late.'},
+  {emoji:'🤫', word:'quietly', phonics:'/ˈkwaɪətli/', banglaSpell:'কুয়ায়েটলি', banglaMeaning:'নীরবে', example:'He speaks quietly.'},
+  {emoji:'📢', word:'loudly', phonics:'/ˈlaʊdli/', banglaSpell:'লাউডলি', banglaMeaning:'জোরে', example:'They sing loudly.'},
+  {emoji:'❤️', word:'happily', phonics:'/ˈhæpəli/', banglaSpell:'হ্যাপিলি', banglaMeaning:'আনন্দে', example:'She smiles happily.'},
+  {emoji:'😞', word:'sadly', phonics:'/ˈsædli/', banglaSpell:'স্যাডলি', banglaMeaning:'দুঃখে', example:'He spoke sadly.'},
+  {emoji:'😡', word:'angrily', phonics:'/ˈæŋɡrɪli/', banglaSpell:'অ্যাংগ্রিলি', banglaMeaning:'রাগান্বিতভাবে', example:'She answered angrily.'},
+  {emoji:'🤔', word:'carefully', phonics:'/ˈkerfəli/', banglaSpell:'কেয়ারফুলি', banglaMeaning:'সাবধানে', example:'Drive carefully.'},
+  {emoji:'🙈', word:'badly', phonics:'/ˈbædli/', banglaSpell:'ব্যাডলি', banglaMeaning:'খারাপভাবে', example:'He sings badly.'},
+  {emoji:'💪', word:'well', phonics:'/wel/', banglaSpell:'ওয়েল', banglaMeaning:'ভালভাবে', example:'She writes well.'},
+  {emoji:'🙄', word:'easily', phonics:'/ˈiːzəli/', banglaSpell:'ইজিলি', banglaMeaning:'সহজে', example:'I can solve it easily.'},
+  {emoji:'⏳', word:'already', phonics:'/ɔːlˈredi/', banglaSpell:'অলরেডি', banglaMeaning:'ইতিমধ্যেই', example:'I already know it.'},
+  {emoji:'⏱️', word:'still', phonics:'/stɪl/', banglaSpell:'স্টিল', banglaMeaning:'এখনও', example:'She is still working.'},
+  {emoji:'⏭️', word:'soon', phonics:'/suːn/', banglaSpell:'সুন', banglaMeaning:'শিগগিরই', example:'I will call you soon.'},
+  {emoji:'🎯', word:'exactly', phonics:'/ɪɡˈzæktli/', banglaSpell:'একজ্যাক্টলি', banglaMeaning:'ঠিক ঠিক', example:'You are exactly right.'},
+  {emoji:'🔎', word:'clearly', phonics:'/ˈklɪrli/', banglaSpell:'ক্লিয়ারলি', banglaMeaning:'পরিষ্কারভাবে', example:'He explained clearly.'},
+  {emoji:'🕵️', word:'secretly', phonics:'/ˈsiːkrətli/', banglaSpell:'সিক্রেটলি', banglaMeaning:'গোপনে', example:'They met secretly.'},
+  {emoji:'🤷', word:'probably', phonics:'/ˈprɑːbəbli/', banglaSpell:'প্রবাবলি', banglaMeaning:'সম্ভবত', example:'He will probably come.'},
+  {emoji:'❓', word:'perhaps', phonics:'/pərˈhæps/', banglaSpell:'পারহ্যাপস', banglaMeaning:'হয়তো', example:'Perhaps he is right.'},
+  {emoji:'💯', word:'surely', phonics:'/ˈʃʊrli/', banglaSpell:'শ্যোরলি', banglaMeaning:'নিশ্চিতভাবে', example:'He will surely win.'},
+  {emoji:'🚫', word:'hardly', phonics:'/ˈhɑːrdli/', banglaSpell:'হার্ডলি', banglaMeaning:'কঠিনে', example:'I can hardly hear.'},
+  {emoji:'😐', word:'simply', phonics:'/ˈsɪmpli/', banglaSpell:'সিম্পলি', banglaMeaning:'সহজভাবে', example:'He explained simply.'},
+  {emoji:'✨', word:'really', phonics:'/ˈriːəli/', banglaSpell:'রিয়েলি', banglaMeaning:'সত্যিই', example:'I really like it.'},
+  {emoji:'👀', word:'just', phonics:'/dʒʌst/', banglaSpell:'জাস্ট', banglaMeaning:'মাত্র', example:'I just arrived.'},
+  {emoji:'⏲️', word:'now', phonics:'/naʊ/', banglaSpell:'নাউ', banglaMeaning:'এখন', example:'Come here now.'},
+  {emoji:'⏮️', word:'then', phonics:'/ðen/', banglaSpell:'দেন', banglaMeaning:'তারপর', example:'I studied, then slept.'},
+  {emoji:'🔜', word:'afterwards', phonics:'/ˈæftərwərdz/', banglaSpell:'আফটারওয়ার্ডস', banglaMeaning:'পরে', example:'We ate and afterwards walked.'},
+  {emoji:'👆', word:'up', phonics:'/ʌp/', banglaSpell:'আপ', banglaMeaning:'উপরে', example:'Look up.'},
+  {emoji:'👇', word:'down', phonics:'/daʊn/', banglaSpell:'ডাউন', banglaMeaning:'নিচে', example:'Sit down.'},
+  {emoji:'➡️', word:'forward', phonics:'/ˈfɔːrwərd/', banglaSpell:'ফরওয়ার্ড', banglaMeaning:'সামনে', example:'Step forward.'},
+  {emoji:'⬅️', word:'back', phonics:'/bæk/', banglaSpell:'ব্যাক', banglaMeaning:'পিছনে', example:'Go back.'},
+  {emoji:'🌎', word:'everywhere', phonics:'/ˈevriwer/', banglaSpell:'এভরিহোয়ার', banglaMeaning:'সবখানে', example:'We looked everywhere.'},
+  {emoji:'🏠', word:'here', phonics:'/hɪr/', banglaSpell:'হিয়ার', banglaMeaning:'এখানে', example:'Come here.'},
+  {emoji:'🚪', word:'outside', phonics:'/ˌaʊtˈsaɪd/', banglaSpell:'আউটসাইড', banglaMeaning:'বাইরে', example:'He is outside.'},
+  {emoji:'🚪', word:'inside', phonics:'/ˌɪnˈsaɪd/', banglaSpell:'ইনসাইড', banglaMeaning:'ভেতরে', example:'She is inside.'},
+  {emoji:'🚂', word:'away', phonics:'/əˈweɪ/', banglaSpell:'অ্যাওয়ে', banglaMeaning:'দূরে', example:'He went away.'},
+  {emoji:'👫', word:'together', phonics:'/təˈɡeðər/', banglaSpell:'টুগেদার', banglaMeaning:'একসাথে', example:'We work together.'},
+  {emoji:'👤', word:'alone', phonics:'/əˈloʊn/', banglaSpell:'অ্যালোন', banglaMeaning:'একা', example:'He lives alone.'},
+  {emoji:'💤', word:'almost', phonics:'/ˈɔːlmoʊst/', banglaSpell:'অলমোস্ট', banglaMeaning:'প্রায়', example:'It is almost done.'},
+  {emoji:'🕐', word:'finally', phonics:'/ˈfaɪnəli/', banglaSpell:'ফাইনালি', banglaMeaning:'অবশেষে', example:'Finally, we arrived.'},
+  {emoji:'🎉', word:'luckily', phonics:'/ˈlʌkɪli/', banglaSpell:'লাকিলি', banglaMeaning:'সৌভাগ্যক্রমে', example:'Luckily, he passed.'}
+];
+
+const cardsDiv = document.getElementById('cards');
+adverbs.forEach((adv, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="emoji">${adv.emoji}</div>
+    <div class="word">${adv.word}</div>
+    <div class="phonics">${adv.phonics}</div>
+    <div class="bangla">স্পেলিং: ${adv.banglaSpell}</div>
+    <div class="bangla">অর্থ: ${adv.banglaMeaning}</div>
+    <div class="example">💡 ${adv.example}</div>
+    <button onclick="speakAdverb('${adv.word}','${adv.example}')">🔊 Speak</button>
+  `;
+  cardsDiv.appendChild(card);
+});
+
+// Speech setup
+let voices = [];
+function populateVoices() {
+  voices = speechSynthesis.getVoices();
+  const voiceSelect = document.getElementById('voiceSelect');
+  voiceSelect.innerHTML = '';
+  voices.forEach((v,i)=>{
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.innerHTML = v.name + ' ('+v.lang+')';
+    voiceSelect.appendChild(opt);
+  });
+}
+populateVoices();
+speechSynthesis.onvoiceschanged = populateVoices;
+
+function speakAdverb(word,example){
+  const voiceIndex = document.getElementById('voiceSelect').value;
+  const rate = document.getElementById('rateRange').value;
+  let utter = new SpeechSynthesisUtterance(word + ". Example: " + example);
+  if(voices[voiceIndex]) utter.voice = voices[voiceIndex];
+  utter.rate = rate;
+  speechSynthesis.speak(utter);
+}
+</script>
+</body>
+</html>
