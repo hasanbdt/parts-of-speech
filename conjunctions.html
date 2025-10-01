@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>50 Daily Conjunctions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fffdf5;
+      text-align: center;
+      margin: 20px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .controls {
+      margin: 20px;
+    }
+    select, input {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .card {
+      display: inline-block;
+      width: 260px;
+      background: #ffffff;
+      margin: 12px;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .emoji {
+      font-size: 40px;
+    }
+    .word {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1d3557;
+    }
+    .phonics {
+      font-size: 14px;
+      color: #6c757d;
+    }
+    .bangla {
+      font-size: 16px;
+      color: #457b9d;
+    }
+    .example {
+      margin: 8px 0;
+      font-size: 14px;
+      color: #333;
+    }
+    button {
+      padding: 6px 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      background: #1d3557;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #457b9d;
+    }
+  </style>
+</head>
+<body>
+<!-- ================= HEADER + NAVBAR START ================= -->
+<header style="background:#007bff; color:white; padding:15px 20px; display:flex; flex-direction:column; align-items:center; gap:10px;">
+  <div style="font-size:28px; font-weight:bold;">📚 Daily English Learning</div>
+  <nav style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px;">
+    <a href="index.html" class="nav-link">Home</a>
+	<a href="nouns.html" class="nav-link">Nouns</a>
+    <a href="pronouns.html" class="nav-link">Pronouns</a>
+    <a href="adjectives.html" class="nav-link">Adjectives</a>
+    <a href="verbs.html" class="nav-link">Verbs</a>
+    <a href="adverbs.html" class="nav-link">Adverbs</a>
+    <a href="prepositions.html" class="nav-link">Prepositions</a>
+    <a href="conjunctions.html" class="nav-link">Conjunctions</a>
+    <a href="interjections.html" class="nav-link">Interjections</a>
+  </nav>
+</header>
+
+<style>
+  .nav-link {
+    color:white; text-decoration:none; font-weight:bold; padding:6px 12px; border-radius:6px; transition:0.3s;
+  }
+  .nav-link:hover { background:white; color:#007bff; }
+  .nav-link.active { background:#0056b3; color:white; }
+</style>
+
+<script>
+  // Auto highlight active page
+  const currentPage = window.location.pathname.split("/").pop();
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach(link => {
+    if(link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+</script>
+<!-- ================= HEADER + NAVBAR END ================= -->
+
+
+  <h1>🔗 50 Daily Conjunctions</h1>
+
+  <!-- Controls -->
+  <div class="controls">
+    <label for="voiceSelect">Voice:</label>
+    <select id="voiceSelect"></select>
+    <label for="rateRange">Speed:</label>
+    <input type="range" id="rateRange" min="0.5" max="2" value="1" step="0.1">
+  </div>
+
+  <!-- Cards -->
+  <div id="cards"></div>
+
+  <script>
+    const data = [
+      {emoji:"➕", word:"And", phonics:"/ænd/", bangla:"অ্যান্ড - এবং", meaning:"এবং", example:"I like tea and coffee."},
+      {emoji:"➖", word:"Or", phonics:"/ɔːr/", bangla:"অর - অথবা", meaning:"অথবা", example:"Do you want tea or coffee?"},
+      {emoji:"❌", word:"But", phonics:"/bʌt/", bangla:"বাট - কিন্তু", meaning:"কিন্তু", example:"I am tired but happy."},
+      {emoji:"🔄", word:"So", phonics:"/soʊ/", bangla:"সো - তাই", meaning:"তাই", example:"It was raining, so we stayed home."},
+      {emoji:"➡️", word:"Then", phonics:"/ðen/", bangla:"দেন - তারপর", meaning:"তারপর", example:"First study, then play."},
+      {emoji:"⚖️", word:"Yet", phonics:"/jɛt/", bangla:"ইয়েট - তবুও", meaning:"তবুও", example:"He is rich, yet unhappy."},
+      {emoji:"⚡", word:"Because", phonics:"/bɪˈkɔz/", bangla:"বিকজ - কারণ", meaning:"কারণ", example:"I stayed home because it was raining."},
+      {emoji:"⚠️", word:"Although", phonics:"/ɔːlˈðoʊ/", bangla:"অলদো - যদিও", meaning:"যদিও", example:"Although he is old, he works hard."},
+      {emoji:"🚫", word:"Though", phonics:"/ðoʊ/", bangla:"দো - যদিও", meaning:"যদিও", example:"Though it was late, he waited."},
+      {emoji:"✅", word:"If", phonics:"/ɪf/", bangla:"ইফ - যদি", meaning:"যদি", example:"If it rains, we will stay home."},
+      {emoji:"🔀", word:"Whether", phonics:"/ˈwɛðər/", bangla:"হুয়েদার - কিনা", meaning:"কিনা", example:"I don’t know whether she is coming."},
+      {emoji:"⏩", word:"While", phonics:"/waɪl/", bangla:"হুয়াইল - যখন", meaning:"যখন", example:"I read while eating."},
+      {emoji:"🕒", word:"When", phonics:"/wɛn/", bangla:"হুয়েন - যখন", meaning:"যখন", example:"I was sleeping when you called."},
+      {emoji:"🔁", word:"As", phonics:"/æz/", bangla:"অ্যাজ - যেমন", meaning:"যেমন/যখন", example:"Do as I say."},
+      {emoji:"⏳", word:"Since", phonics:"/sɪns/", bangla:"সিন্স - যেহেতু", meaning:"যেহেতু", example:"I have been here since morning."},
+      {emoji:"🌉", word:"Until", phonics:"/ənˈtɪl/", bangla:"আন্টিল - পর্যন্ত", meaning:"পর্যন্ত", example:"Wait until I come."},
+      {emoji:"🧩", word:"Unless", phonics:"/ənˈlɛs/", bangla:"আনলেস - যদি না", meaning:"যদি না", example:"I won’t go unless you come."},
+      {emoji:"🔄", word:"As if", phonics:"/æz ɪf/", bangla:"অ্যাজ ইফ - যেন", meaning:"যেন", example:"He acts as if he knows everything."},
+      {emoji:"📌", word:"As soon as", phonics:"/æz suːn æz/", bangla:"অ্যাস সুন অ্যাজ - সাথে সাথেই", meaning:"সাথে সাথেই", example:"Call me as soon as you arrive."},
+      {emoji:"🧭", word:"Where", phonics:"/wɛr/", bangla:"হুয়্যার - যেখানে", meaning:"যেখানে", example:"I will go where you go."},
+      {emoji:"📝", word:"That", phonics:"/ðæt/", bangla:"দ্যাট - যে", meaning:"যে", example:"I know that he is honest."},
+      {emoji:"🖇️", word:"Both...and", phonics:"/boʊθ ænd/", bangla:"বথ এন্ড - উভয়ই", meaning:"উভয়ই", example:"Both Ali and Karim are here."},
+      {emoji:"➕", word:"Either...or", phonics:"/ˈiðər ɔr/", bangla:"আইদার অর - হয়তো...অথবা", meaning:"হয়তো...অথবা", example:"Either you study or you fail."},
+      {emoji:"➖", word:"Neither...nor", phonics:"/ˈniðər nɔr/", bangla:"নাইদার নর - না...না", meaning:"না...না", example:"Neither he nor I am guilty."},
+      {emoji:"🔗", word:"Not only...but also", phonics:"/nɑt ˈoʊnli bʌt ˈɔlsoʊ/", bangla:"নট অনলি বাট অলসো - শুধু নয় বরং", meaning:"শুধু নয় বরং", example:"She is not only smart but also kind."},
+      {emoji:"📖", word:"In order that", phonics:"/ɪn ˈɔrdər ðæt/", bangla:"ইন অর্ডার দ্যাট - যাতে", meaning:"যাতে", example:"I work hard in order that I may succeed."},
+      {emoji:"🎯", word:"So that", phonics:"/soʊ ðæt/", bangla:"সো দ্যাট - যাতে", meaning:"যাতে", example:"He spoke loudly so that all could hear."},
+      {emoji:"⚖️", word:"Even though", phonics:"/ˈiːvən ðoʊ/", bangla:"ইভেন দো - যদিও", meaning:"যদিও", example:"Even though he was sick, he worked."},
+      {emoji:"🔄", word:"Provided that", phonics:"/prəˈvaɪdɪd ðæt/", bangla:"প্রোভাইডেড দ্যাট - শর্তে", meaning:"শর্তে", example:"I will help you provided that you work hard."},
+      {emoji:"📊", word:"As well as", phonics:"/æz wɛl æz/", bangla:"অ্যাজ ওয়েল অ্যাজ - এছাড়াও", meaning:"এছাড়াও", example:"He sings as well as dances."},
+      {emoji:"⚡", word:"Because of", phonics:"/bɪˈkɔz əv/", bangla:"বিকজ অফ - কারণে", meaning:"কারণে", example:"The match was canceled because of rain."},
+      {emoji:"🛑", word:"Even if", phonics:"/ˈiːvən ɪf/", bangla:"ইভেন ইফ - যদিও", meaning:"যদিও", example:"I will come even if it rains."},
+      {emoji:"🔍", word:"As though", phonics:"/æz ðoʊ/", bangla:"অ্যাজ দো - যেন", meaning:"যেন", example:"He smiled as though he knew everything."},
+      {emoji:"🕒", word:"Just as", phonics:"/dʒʌst æz/", bangla:"জাস্ট অ্যাজ - ঠিক যেমন", meaning:"ঠিক যেমন", example:"Just as I was leaving, he arrived."},
+      {emoji:"📌", word:"Now that", phonics:"/naʊ ðæt/", bangla:"নাউ দ্যাট - এখন যেহেতু", meaning:"এখন যেহেতু", example:"Now that you are here, let’s start."},
+      {emoji:"⚖️", word:"Rather than", phonics:"/ˈræðər ðæn/", bangla:"রাদার দ্যান - বরং", meaning:"বরং", example:"I prefer tea rather than coffee."},
+      {emoji:"🌀", word:"In case", phonics:"/ɪn keɪs/", bangla:"ইন কেস - যদি হয়", meaning:"যদি হয়", example:"Take an umbrella in case it rains."},
+      {emoji:"⏳", word:"Till", phonics:"/tɪl/", bangla:"টিল - পর্যন্ত", meaning:"পর্যন্ত", example:"Wait till I return."},
+      {emoji:"🚦", word:"Whereas", phonics:"/ˌwerˈæz/", bangla:"হুয়েরাজ - অথচ", meaning:"অথচ", example:"He is tall whereas his brother is short."},
+      {emoji:"🔄", word:"Even when", phonics:"/ˈiːvən wɛn/", bangla:"ইভেন হুয়েন - এমনকি যখন", meaning:"এমনকি যখন", example:"He smiled even when he was sad."},
+      {emoji:"➡️", word:"Forasmuch as", phonics:"/ˌfɔːrəzˈmʌtʃ æz/", bangla:"ফরাসমাচ অ্যাজ - যেহেতু", meaning:"যেহেতু", example:"Forasmuch as I know, he is honest."},
+      {emoji:"🔁", word:"So long as", phonics:"/soʊ lɔːŋ æz/", bangla:"সো লং অ্যাজ - যতক্ষণ", meaning:"যতক্ষণ", example:"You can stay so long as you are quiet."},
+      {emoji:"🔀", word:"Supposing", phonics:"/səˈpoʊzɪŋ/", bangla:"সাপোজিং - ধরে নাও", meaning:"ধরে নাও", example:"Supposing it rains, what will you do?"},
+      {emoji:"🖇️", word:"Than", phonics:"/ðæn/", bangla:"দ্যান - থেকে", meaning:"থেকে", example:"She is taller than me."},
+      {emoji:"📖", word:"Once", phonics:"/wʌns/", bangla:"ওয়ান্স - একবার", meaning:"একবার/যখন", example:"Once you try, you will succeed."},
+      {emoji:"🧩", word:"Now", phonics:"/naʊ/", bangla:"নাউ - এখন", meaning:"এখন", example:"I will go now that it’s ready."}
+    ];
+
+    const cardsContainer = document.getElementById('cards');
+    data.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="emoji">${item.emoji}</div>
+        <div class="word">${item.word}</div>
+        <div class="phonics">${item.phonics}</div>
+        <div class="bangla">${item.bangla} (${item.meaning})</div>
+        <div class="example"><b>Example:</b> ${item.example}</div>
+        <button onclick="speak('${item.word}. ${item.example}')">🔊 Speak</button>
+      `;
+      cardsContainer.appendChild(card);
+    });
+
+    // Speech synthesis
+    let voices = [];
+    const voiceSelect = document.getElementById('voiceSelect');
+    const rateRange = document.getElementById('rateRange');
+
+    function loadVoices() {
+      voices = speechSynthesis.getVoices();
+      voiceSelect.innerHTML = '';
+      voices.forEach((voice, i) => {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = voice.name + ' (' + voice.lang + ')';
+        voiceSelect.appendChild(option);
+      });
+    }
+    speechSynthesis.onvoiceschanged = loadVoices;
+
+    function speak(text) {
+      const utter = new SpeechSynthesisUtterance(text);
+      const selectedVoice = voices[voiceSelect.value];
+      if (selectedVoice) utter.voice = selectedVoice;
+      utter.rate = parseFloat(rateRange.value);
+      speechSynthesis.speak(utter);
+    }
+
+    loadVoices();
+  </script>
+</body>
+</html>

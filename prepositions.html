@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>50 Daily Prepositions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5faff;
+      text-align: center;
+      margin: 20px;
+    }
+    h1 {
+      color: #2a4d69;
+    }
+    .controls {
+      margin: 20px;
+    }
+    select, input {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .card {
+      display: inline-block;
+      width: 260px;
+      background: #ffffff;
+      margin: 12px;
+      padding: 15px;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .emoji {
+      font-size: 40px;
+    }
+    .word {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1d3557;
+    }
+    .phonics {
+      font-size: 14px;
+      color: #6c757d;
+    }
+    .bangla {
+      font-size: 16px;
+      color: #457b9d;
+    }
+    .example {
+      margin: 8px 0;
+      font-size: 14px;
+      color: #333;
+    }
+    button {
+      padding: 6px 12px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 10px;
+      background: #1d3557;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #457b9d;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= HEADER + NAVBAR START ================= -->
+<header style="background:#007bff; color:white; padding:15px 20px; display:flex; flex-direction:column; align-items:center; gap:10px;">
+  <div style="font-size:28px; font-weight:bold;">📚 Daily English Learning</div>
+  <nav style="display:flex; flex-wrap:wrap; justify-content:center; gap:15px;">
+    <a href="index.html" class="nav-link">Home</a>
+	<a href="nouns.html" class="nav-link">Nouns</a>
+    <a href="pronouns.html" class="nav-link">Pronouns</a>
+    <a href="adjectives.html" class="nav-link">Adjectives</a>
+    <a href="verbs.html" class="nav-link">Verbs</a>
+    <a href="adverbs.html" class="nav-link">Adverbs</a>
+    <a href="prepositions.html" class="nav-link">Prepositions</a>
+    <a href="conjunctions.html" class="nav-link">Conjunctions</a>
+    <a href="interjections.html" class="nav-link">Interjections</a>
+  </nav>
+</header>
+
+<style>
+  .nav-link {
+    color:white; text-decoration:none; font-weight:bold; padding:6px 12px; border-radius:6px; transition:0.3s;
+  }
+  .nav-link:hover { background:white; color:#007bff; }
+  .nav-link.active { background:#0056b3; color:white; }
+</style>
+
+<script>
+  // Auto highlight active page
+  const currentPage = window.location.pathname.split("/").pop();
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach(link => {
+    if(link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+</script>
+<!-- ================= HEADER + NAVBAR END ================= -->
+
+  <h1>📘 50 Daily Prepositions</h1>
+
+  <!-- Controls -->
+  <div class="controls">
+    <label for="voiceSelect">Voice:</label>
+    <select id="voiceSelect"></select>
+    <label for="rateRange">Speed:</label>
+    <input type="range" id="rateRange" min="0.5" max="2" value="1" step="0.1">
+  </div>
+
+  <!-- Cards -->
+  <div id="cards"></div>
+
+  <script>
+    const data = [
+      {emoji:"⬆️", word:"Above", phonics:"/əˈbʌv/", bangla:"অ্যাবাভ - উপরে", meaning:"উপরে", example:"The lamp is above the table."},
+      {emoji:"⬇️", word:"Below", phonics:"/bɪˈloʊ/", bangla:"বিলো - নিচে", meaning:"নিচে", example:"The shoes are below the bed."},
+      {emoji:"➡️", word:"Across", phonics:"/əˈkrɔs/", bangla:"অ্যাক্রস - পারাপার", meaning:"এক পাশ থেকে অন্য পাশে", example:"He walked across the road."},
+      {emoji:"🏠", word:"At", phonics:"/æt/", bangla:"অ্যাট - এ/তে", meaning:"স্থানে", example:"I am at home."},
+      {emoji:"📍", word:"In", phonics:"/ɪn/", bangla:"ইন - ভিতরে", meaning:"ভিতরে", example:"The toys are in the box."},
+      {emoji:"📦", word:"Into", phonics:"/ˈɪntu/", bangla:"ইন্টু - ভেতরে", meaning:"ভেতরে যাওয়া", example:"She went into the room."},
+      {emoji:"🚪", word:"Out", phonics:"/aʊt/", bangla:"আউট - বাইরে", meaning:"বাইরে", example:"He went out of the house."},
+      {emoji:"↔️", word:"Between", phonics:"/bɪˈtwiːn/", bangla:"বিটুইন - মধ্যে", meaning:"দুই কিছুর মধ্যে", example:"The ball is between two chairs."},
+      {emoji:"↔️", word:"Among", phonics:"/əˈmʌŋ/", bangla:"অ্যামং - মধ্যে", meaning:"একাধিকের মধ্যে", example:"He is popular among his friends."},
+      {emoji:"⬅️", word:"Before", phonics:"/bɪˈfɔːr/", bangla:"বিফোর - আগে", meaning:"আগে", example:"Wash your hands before eating."},
+      {emoji:"➡️", word:"After", phonics:"/ˈæftər/", bangla:"আফটার - পরে", meaning:"পরে", example:"We met after lunch."},
+      {emoji:"🕒", word:"During", phonics:"/ˈdjʊrɪŋ/", bangla:"ডিউরিং - চলাকালীন", meaning:"চলাকালীন", example:"She slept during the movie."},
+      {emoji:"🕓", word:"Since", phonics:"/sɪns/", bangla:"সিন্স - থেকে", meaning:"থেকে", example:"I have lived here since 2010."},
+      {emoji:"🕔", word:"For", phonics:"/fɔːr/", bangla:"ফর - জন্য", meaning:"জন্য", example:"This gift is for you."},
+      {emoji:"↖️", word:"From", phonics:"/frʌm/", bangla:"ফ্রম - থেকে", meaning:"থেকে", example:"He came from London."},
+      {emoji:"↘️", word:"To", phonics:"/tuː/", bangla:"টু - পর্যন্ত", meaning:"দিকে / পর্যন্ত", example:"I am going to school."},
+      {emoji:"↩️", word:"Toward", phonics:"/təˈwɔrd/", bangla:"টুওয়ার্ড - দিকে", meaning:"দিকে", example:"She moved toward the door."},
+      {emoji:"↔️", word:"Along", phonics:"/əˈlɔːŋ/", bangla:"অ্যালং - বরাবর", meaning:"বরাবর", example:"They walked along the beach."},
+      {emoji:"🛣️", word:"Through", phonics:"/θruː/", bangla:"থ্রু - মাধ্যমে", meaning:"মাধ্যমে", example:"He went through the tunnel."},
+      {emoji:"🏞️", word:"Over", phonics:"/ˈoʊvər/", bangla:"ওভার - উপরে", meaning:"উপরে", example:"The plane flew over the city."},
+      {emoji:"🕳️", word:"Under", phonics:"/ˈʌndər/", bangla:"আন্ডার - নিচে", meaning:"নিচে", example:"The cat is under the table."},
+      {emoji:"↔️", word:"Beside", phonics:"/bɪˈsaɪd/", bangla:"বিসাইড - পাশে", meaning:"পাশে", example:"The school is beside the park."},
+      {emoji:"↔️", word:"Near", phonics:"/nɪr/", bangla:"নিয়ার - নিকটে", meaning:"নিকটে", example:"My house is near the river."},
+      {emoji:"↔️", word:"Around", phonics:"/əˈraʊnd/", bangla:"অ্যারাউন্ড - চারপাশে", meaning:"চারপাশে", example:"They sat around the fire."},
+      {emoji:"↔️", word:"Against", phonics:"/əˈɡeɪnst/", bangla:"অ্যাগেইনস্ট - বিপক্ষে", meaning:"বিপক্ষে", example:"The chair is against the wall."},
+      {emoji:"↔️", word:"Inside", phonics:"/ɪnˈsaɪd/", bangla:"ইনসাইড - ভিতরে", meaning:"ভিতরে", example:"The kids are inside the house."},
+      {emoji:"↔️", word:"Outside", phonics:"/ˌaʊtˈsaɪd/", bangla:"আউটসাইড - বাইরে", meaning:"বাইরে", example:"The car is outside the garage."},
+      {emoji:"↔️", word:"Upon", phonics:"/əˈpɒn/", bangla:"আপন - উপরে", meaning:"উপর", example:"He placed his hand upon mine."},
+      {emoji:"↔️", word:"Without", phonics:"/wɪˈðaʊt/", bangla:"উইদাউট - ছাড়া", meaning:"ছাড়া", example:"I can’t live without you."},
+      {emoji:"↔️", word:"Within", phonics:"/wɪˈðɪn/", bangla:"উইদিন - ভিতরে", meaning:"ভিতরে", example:"Finish this within an hour."},
+      {emoji:"↔️", word:"Onto", phonics:"/ˈɒntu/", bangla:"অন্টু - উপরে", meaning:"উপর", example:"She climbed onto the roof."},
+      {emoji:"↔️", word:"Inside of", phonics:"/ɪnˈsaɪd əv/", bangla:"ইনসাইড অফ - ভিতরে", meaning:"ভিতরে", example:"The toy is inside of the box."},
+      {emoji:"↔️", word:"Outside of", phonics:"/ˈaʊtsaɪd əv/", bangla:"আউটসাইড অফ - বাইরে", meaning:"বাইরে", example:"He stood outside of the door."},
+      {emoji:"↔️", word:"Next to", phonics:"/nekst tuː/", bangla:"নেক্সট টু - পাশে", meaning:"পাশে", example:"She sat next to me."},
+      {emoji:"↔️", word:"Opposite", phonics:"/ˈɑːpəzɪt/", bangla:"অপোজিট - বিপরীতে", meaning:"বিপরীতে", example:"The bank is opposite the hospital."},
+      {emoji:"↔️", word:"With", phonics:"/wɪð/", bangla:"উইথ - সাথে", meaning:"সাথে", example:"I came with my friend."},
+      {emoji:"↔️", word:"By", phonics:"/baɪ/", bangla:"বাই - পাশে", meaning:"পাশে / দ্বারা", example:"He is standing by the door."},
+      {emoji:"↔️", word:"About", phonics:"/əˈbaʊt/", bangla:"অ্যাবাউট - সম্পর্কে", meaning:"সম্পর্কে", example:"We talked about the plan."},
+      {emoji:"↔️", word:"Concerning", phonics:"/kənˈsɜrnɪŋ/", bangla:"কনসার্নিং - বিষয়ে", meaning:"বিষয়ে", example:"He asked concerning your job."},
+      {emoji:"↔️", word:"Regarding", phonics:"/rɪˈɡɑrdɪŋ/", bangla:"রিগার্ডিং - সম্পর্কে", meaning:"সম্পর্কে", example:"He spoke regarding the issue."},
+      {emoji:"↔️", word:"Except", phonics:"/ɪkˈsept/", bangla:"এক্সেপ্ট - ছাড়া", meaning:"ছাড়া", example:"Everyone came except him."},
+      {emoji:"↔️", word:"Like", phonics:"/laɪk/", bangla:"লাইক - মতো", meaning:"মতো", example:"She runs like a deer."},
+      {emoji:"↔️", word:"Unlike", phonics:"/ˌʌnˈlaɪk/", bangla:"আনলাইক - অমতো", meaning:"অমতো", example:"This is unlike his nature."},
+      {emoji:"↔️", word:"Inside of", phonics:"/ɪnˈsaɪd əv/", bangla:"ভিতরে", meaning:"ভিতরে", example:"He looked inside of the bag."},
+      {emoji:"↔️", word:"Past", phonics:"/pæst/", bangla:"পাস্ট - অতিক্রম", meaning:"অতিক্রম", example:"He walked past the shop."},
+      {emoji:"↔️", word:"Upon", phonics:"/əˈpɒn/", bangla:"আপন - উপর", meaning:"উপর", example:"The book is upon the desk."},
+      {emoji:"↔️", word:"Inside", phonics:"/ɪnˈsaɪd/", bangla:"ইনসাইড - ভিতরে", meaning:"ভিতরে", example:"Stay inside the room."},
+    ];
+
+    const cardsContainer = document.getElementById('cards');
+    data.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="emoji">${item.emoji}</div>
+        <div class="word">${item.word}</div>
+        <div class="phonics">${item.phonics}</div>
+        <div class="bangla">${item.bangla} (${item.meaning})</div>
+        <div class="example"><b>Example:</b> ${item.example}</div>
+        <button onclick="speak('${item.word}. ${item.example}')">🔊 Speak</button>
+      `;
+      cardsContainer.appendChild(card);
+    });
+
+    // Speech synthesis
+    let voices = [];
+    const voiceSelect = document.getElementById('voiceSelect');
+    const rateRange = document.getElementById('rateRange');
+
+    function loadVoices() {
+      voices = speechSynthesis.getVoices();
+      voiceSelect.innerHTML = '';
+      voices.forEach((voice, i) => {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = voice.name + ' (' + voice.lang + ')';
+        voiceSelect.appendChild(option);
+      });
+    }
+    speechSynthesis.onvoiceschanged = loadVoices;
+
+    function speak(text) {
+      const utter = new SpeechSynthesisUtterance(text);
+      const selectedVoice = voices[voiceSelect.value];
+      if (selectedVoice) utter.voice = selectedVoice;
+      utter.rate = parseFloat(rateRange.value);
+      speechSynthesis.speak(utter);
+    }
+
+    loadVoices();
+  </script>
+</body>
+</html>
